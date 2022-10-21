@@ -9,11 +9,23 @@ class ApplicationController < ActionController::Base
     render({:template => "calculation_templates/square_root_form.html.erb"})
   end
 
-  def rand_form
+  def blank_rand_form
 
     render({:template => "calculation_templates/rand_form.html.erb"})
   end
 
+  def blank_payment_form
+
+    render({:template => "calculation_templates/payment_form.html.erb"})
+  end
+
+  def calculate_payment
+    @apr = params.fetch("apr").to_f
+    @years = params.fetch("years").to_f
+    @principal = params.fetch("principal").to_f
+    @payment = @apr * @years * @principal
+    render({:template => "calculation_templates/payment_results.html.erb"})
+  end
 
   def calculate_square
     @num = params.fetch("elephant").to_f
